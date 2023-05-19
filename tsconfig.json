@@ -18,6 +18,6 @@
     "baseUrl": "./"
   },
   "exclude": ["node_modules"],
-  "include": ["index.js", "App.js", "src", "test", "*.js"]
+  "include": ["index.js", "App.tsx", "src", "test", "*.js"]
   
 }

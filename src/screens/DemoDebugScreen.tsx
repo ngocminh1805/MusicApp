@@ -1,11 +1,10 @@
 import React, { FC } from "react"
-import * as Application from "expo-application"
+// import * as Application from "expo-application"
 import { Linking, Platform, TextStyle, View, ViewStyle } from "react-native"
 import { Button, ListItem, Screen, Text } from "../components"
 import { DemoTabScreenProps } from "../navigators/DemoNavigator"
 import { colors, spacing } from "../theme"
 import { isRTL } from "../i18n"
-import { useStores } from "../models"
 
 function openLinkInBrowser(url: string) {
   Linking.canOpenURL(url).then((canOpen) => canOpen && Linking.openURL(url))
@@ -14,25 +13,30 @@ function openLinkInBrowser(url: string) {
 export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function DemoDebugScreen(
   _props,
 ) {
-  const {
-    authenticationStore: { logout },
-  } = useStores()
+  
 
   const usingHermes = typeof HermesInternal === "object" && HermesInternal !== null
 
+  const Application = {
+    applicationId: '123',
+    applicationName: 'Music App',
+    nativeApplicationVersion: 1,
+    nativeBuildVersion: 1
+  }
+
   const demoReactotron = React.useMemo(
     () => async () => {
-      console.tron.display({
-        name: "DISPLAY",
-        value: {
-          appId: Application.applicationId,
-          appName: Application.applicationName,
-          appVersion: Application.nativeApplicationVersion,
-          appBuildVersion: Application.nativeBuildVersion,
-          hermesEnabled: usingHermes,
-        },
-        important: true,
-      })
+      // console.tron.display({
+      //   name: "DISPLAY",
+      //   value: {
+      //     appId: Application.applicationId,
+      //     appName: Application.applicationName,
+      //     appVersion: Application.nativeApplicationVersion,
+      //     appBuildVersion: Application.nativeBuildVersion,
+      //     hermesEnabled: usingHermes,
+      //   },
+      //   important: true,
+      // })
     },
     [],
   )
@@ -92,7 +96,7 @@ export const DemoDebugScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Dem
         <Text style={$hint} tx={`demoDebugScreen.${Platform.OS}ReactotronHint` as const} />
       </View>
       <View style={$buttonContainer}>
-        <Button style={$button} tx="common.logOut" onPress={logout} />
+        <Button style={$button} tx="common.logOut"  />
       </View>
     </Screen>
   )
